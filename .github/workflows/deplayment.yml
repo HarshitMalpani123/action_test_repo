@@ -1,4 +1,4 @@
-name: test project
+name: Deplay project
 on: push
 jobs:
   test: # name of the job
@@ -14,3 +14,19 @@ jobs:
        run: npm ci #install all the dependecies which are locked in package-lock.jason
      - name: run test
        run: npm test
+  deplay:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Get code
+       uses: actions/checkout@v4 #an action already made by github to checkout a branch
+     - name: Install nodejs
+       uses: actions/setup-node@v3
+       with:
+        node-version: 18
+     - name: install depensencies
+       run: npm ci
+     - name: build project
+       run: npm run build
+     - name: Deplay
+       run: echo "Deplaying..."
+
